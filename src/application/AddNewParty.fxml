@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AddNewParty">
+   <children>
+      <Text layoutX="73.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter data of the party." wrappingWidth="162.59375" />
+      <Text layoutX="88.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" wrappingWidth="50.294921875" />
+      <Text layoutX="88.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Leader Name:" wrappingWidth="80.125" />
+      <Text layoutX="88.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Party Slogan:" wrappingWidth="80.12499511241913" />
+      <TextField fx:id="pName" layoutX="200.0" layoutY="98.0" />
+      <TextField fx:id="lName" layoutX="200.0" layoutY="148.0" />
+      <TextField fx:id="pSlogan" layoutX="200.0" layoutY="198.0" />
+      <Button fx:id="c_party" layoutX="408.0" layoutY="299.0" mnemonicParsing="false" onMouseClicked="#createParty" prefHeight="46.0" prefWidth="108.0" text="Submit" />
+      <Button fx:id="back" layoutX="47.0" layoutY="322.0" mnemonicParsing="false" onMouseClicked="#goback" text="Back" />
+   </children>
+</AnchorPane>
