@@ -13,13 +13,12 @@ public class Mysql {
 				
 				Statement stmt=con.createStatement();
 				stmt.execute("use mysql");
-				//ResultSet rs=stmt.executeQuery("select * from account");
 				/*String sql="Insert into administrator values(?,?)";	//name,pin,account type,balance
 				PreparedStatement stat=con.prepareStatement(sql);
 				stat.setString(1,id);
-				stat.setString(2,password);
+				stat.setString(2,password);*/
 				
-				int x=stat.executeUpdate();*/
+				//int x=stat.executeUpdate();
 				
 				
 				//retrieve data
@@ -37,6 +36,8 @@ public class Mysql {
 			
 				if((id==Aid)&&(password==A_pass))
 				{
+					Main mainObj=new Main();
+					mainObj.changeScene("administrator.fxml");
 					return 1;
 				}
 				
@@ -169,10 +170,19 @@ public class Mysql {
 				
 				
 				stmt.execute("use mysql");
-				String sql="Insert into party values(?,?,?,?)";	
+				String sql="0";
+				if(pName=="PMLN") {
+				sql="UPDATE party SET vote_count=vote_count+1 where p_name='PMNL';";	
+				}
+				if(pName=="PTI") {
+					sql="UPDATE party SET vote_count=vote_count+1 where p_name='PTI';";	
+				}
+				if(pName=="PPP") {
+					sql="UPDATE party SET vote_count=vote_count+1 where p_name='PPP';";	
+				}
 				PreparedStatement stat=con.prepareStatement(sql);
 				
-				stat.setInt(4,count);
+				//stat.setInt(4,count);
 				int x=stat.executeUpdate();
 				
 				
@@ -192,6 +202,43 @@ public class Mysql {
 		//getting percentage
 		public static void Percentage(String pName,int count) {
 			
+			
+			
+			//
+			try { 
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				
+				java.sql.Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql","root","tiger12345");
+				
+				Statement stmt=con.createStatement();
+				stmt.execute("use mysql");
+				//retrieve data
+				ResultSet rs=stmt.executeQuery("SELECT p_name,vote_count*100/t.s AS 'percentage' FROM party CROSS JOIN (SELECT SUM(vote_count) AS s FROM party) t;");
+				String partyN;
+				String vCount;
+				while(rs.next())
+				{
+					
+					partyN= rs.getString("p_name");
+					//vCount= rs.getString("vote_count");
+					//String perc=rs.getString("vote_count*100");
+					
+					//System.out.println(partyN+" "+vCount);
+					
+				}
+				//try printing it in fxml
+				
+				
+				con.close();
+			}
+			catch(SQLException throwables)
+			{
+				throwables.printStackTrace();
+			}
+			catch(ClassNotFoundException e)
+			{
+				e.printStackTrace();
+			}
 		}
 		
 		//getting result
@@ -202,32 +249,21 @@ public class Mysql {
 				java.sql.Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql","root","tiger12345");
 				
 				Statement stmt=con.createStatement();
+				stmt.execute("use mysql");
 				//retrieve data
-				ResultSet rs=stmt.executeQuery("select * from party where MAX(count)");
+				ResultSet rs=stmt.executeQuery("select p_name,vote_count from party where vote_count=(select MAX(vote_count) from party);");
 				String partyN;
-				int vCount = 0;
+				String vCount;
 				while(rs.next())
 				{
 					
 					partyN= rs.getString("p_name");
-					vCount= rs.getInt("vote_count");
+					vCount= rs.getString("vote_count");
 					
 					System.out.println(partyN+" "+vCount);
 					
 				}
 				//try printing it in fxml
-				
-				
-				
-				
-				
-				stmt.execute("use mysql");
-				String sql="Insert into party values(?,?,?,?)";	
-				PreparedStatement stat=con.prepareStatement(sql);
-				
-				
-				int x=stat.executeUpdate();
-				
 				
 				
 				con.close();

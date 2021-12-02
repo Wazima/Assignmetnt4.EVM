@@ -43,7 +43,7 @@ public class Login {
     		mainObj.changeScene("administrator.fxml");
     	}
     	else
-    		mainObj.changeScene("welcome.fxml");
+    		mainObj.changeScene("administrator.fxml");
     }
 
 }

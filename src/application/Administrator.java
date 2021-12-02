@@ -43,13 +43,15 @@ public class Administrator {
     }
 
     @FXML
-    void viewPercentage(MouseEvent event) {
+    void viewPercentage(MouseEvent event) throws IOException {
     	sqlObj.Percentage(null, 0);
+    	mainObj.changeScene("welcome.fxml");
     }
 
     @FXML
-    void viewResult(MouseEvent event) {
+    void viewResult(MouseEvent event) throws IOException {
     	sqlObj.Result(); 
+    	mainObj.changeScene("welcome.fxml");
     }
 
 }

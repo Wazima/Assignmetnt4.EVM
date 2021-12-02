@@ -34,6 +34,7 @@ public class Voter implements Initializable {
     	String id=cnic.getText();
     	
     	String p_name=partyid.getValue();
+    	System.out.println("PNAMe:"+p_name);
     	sqlObj.updateParty(p_name, 1);
     	sqlObj.sqlDataEntryVoter(id,p_name);
     //	System.out.println("Hello");
